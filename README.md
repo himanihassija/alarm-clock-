@@ -37,6 +37,10 @@ Enter the number of seconds for the alarm when prompted.
 ## Example
 If you enter 10, the alarm will ring after 10 seconds.
 
+## DEMO
+https://github.com/himanihassija/alarm-clock-/blob/main/alarm%20clock%20snippet.JPG
+
+
 ## Future Improvements
 - Allow setting alarm using hours and minutes
 - Add a graphical user interface
