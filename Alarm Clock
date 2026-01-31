@@ -1,0 +1,44 @@
+from playsound import playsound
+import time
+import os
+
+CLEAR = "\033[2J"
+CLEAR_AND_RETURN = "\033[H"
+
+def format_time(total_seconds):
+    minutes = total_seconds // 60
+    seconds = total_seconds % 60
+    return f"{minutes:02d}:{seconds:02d}"
+
+def get_time_input():
+    while True:
+        try:
+            minutes = int(input("How many minutes to wait: "))
+            seconds = int(input("How many seconds to wait: "))
+            if minutes < 0 or seconds < 0:
+                raise ValueError
+            return minutes * 60 + seconds
+        except ValueError:
+            print("Please enter valid non-negative integers.")
+
+def alarm(total_seconds):
+    elapsed = 0
+    print(CLEAR)
+
+    try:
+        while elapsed < total_seconds:
+            time.sleep(1)
+            elapsed += 1
+            remaining = total_seconds - elapsed
+            print(f"{CLEAR_AND_RETURN}Alarm will sound in: {format_time(remaining)}")
+
+        if os.path.exists("alarm.mp3"):
+            playsound("alarm.mp3")
+        else:
+            print("Alarm finished, but alarm.mp3 was not found.")
+
+    except KeyboardInterrupt:
+        print("\nAlarm cancelled by user.")
+
+total_seconds = get_time_input()
+alarm(total_seconds)
